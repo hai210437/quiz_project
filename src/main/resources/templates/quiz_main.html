@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<h1> Quiz </h1>
+<form action="#" th:action="@{/quiz/save}" th:object="${question}" method ="post">
+    <p th:each = "answer, stat : *{answers}">
+
+        <span th:text = "${answer.aText}">
+        </span>
+        <input type="radio" name="answer"  th:value="${answer.id}" >
+    </p>
+    <label th:text="*{text}"> </label>
+    <p>
+        <input type="submit" value="save">
+    </p>
+
+</form>
+
+
+</body>
+</html>
