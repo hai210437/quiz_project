@@ -15,9 +15,11 @@ public class QuizController {
     private UserRepository userRepo;
     private int id = 1;
     private int score = 0;
-
+    private int questions = repo.findAll().size();
+    private Question q;
 
     public QuizController(QuestionRepository repo, UserRepository userRepo) {
+
         this.repo = repo;
         this.userRepo = userRepo;
     }
@@ -25,22 +27,28 @@ public class QuizController {
 
     @GetMapping("/main")
     public String test(Model model) {
-        Question q = repo.findById(id).get();
+        q = repo.findById(id).get();
         model.addAttribute("question", q);
         return "quiz_main";
     }
 
     @PostMapping("/save")
-    public String save(Question question, int answer) {
-        id++;
-        System.out.println(answer);
-        for (Answer a : question.getAnswers()) {
+    public String save(int answer) {
+        for (Answer a : q.getAnswers()) {
             {
-
+                if (a.getCorrect() && a.getId() == answer) {
+                    score++;
+                }
             }
 
         }
-        return "redirect:/quiz/main";
+        if(id == questions) {
+            return "redirect:/quiz/endpage";
+        }
+        else {
+            id++;
+            return "redirect:/quiz/main";
+        }
     }
 
     @GetMapping("/scoreboard")
