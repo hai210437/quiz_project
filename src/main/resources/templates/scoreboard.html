@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scoreboard</title>
+</head>
+<body>
+<h1>Scoreboard</h1>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Score</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.score}"></td>
+    </tr>
+</table>
+</body>
+</html>

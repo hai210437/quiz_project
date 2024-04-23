@@ -12,11 +12,14 @@ import java.util.List;
 @RequestMapping("/quiz")
 public class QuizController {
     private QuestionRepository repo;
+    private UserRepository userRepo;
     private int id = 1;
     private int score = 0;
 
-    public QuizController(QuestionRepository repo) {
+
+    public QuizController(QuestionRepository repo, UserRepository userRepo) {
         this.repo = repo;
+        this.userRepo = userRepo;
     }
 
 
@@ -38,6 +41,28 @@ public class QuizController {
 
         }
         return "redirect:/quiz/main";
+    }
+
+    @GetMapping("/scoreboard")
+    public String scoreboard(Model model) {
+        var list = userRepo.findAll();
+        list.sort((u1, u2) -> u2.getScore() - u1.getScore());
+        model.addAttribute("users", list);
+        return "scoreboard";
+    }
+
+    @GetMapping("/endpage")
+    public String endpage(Model model) {
+        model.addAttribute("score",score);
+        return "endpage";
+    }
+    @PostMapping("/saveuser")
+    public String saveuser(String usernamefield) {
+        User user = new User();
+        user.setUsername(usernamefield);
+        user.setScore(score);
+        userRepo.save(user);
+        return "redirect:/quiz/scoreboard";
     }
 }
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>End</title>
+</head>
+<body>
+    <h1>Score and username</h1>
+<form action="#" th:action="@{/quiz/saveuser}" th:object="${score}" method ="post">
+    <table>
+        <tbody>
+        <tr>
+            <label>Please put in your username</label>
+            <input type="text" name="usernamefield">
+        </tr>
+
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+         <tr>
+            <label>Score:</label>
+            <label th:text="${score}"></label>
+         </tr>
+
+        </tbody>
+    </table>
+    <p>
+        <input type="submit" value="save">
+    </p>
+</form>
+
+</body>
+</html>
