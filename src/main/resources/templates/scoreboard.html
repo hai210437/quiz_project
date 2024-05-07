@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Scoreboard</h1>
+<form action="#" th:action="@{/quiz/reset}" method ="post">
 <table>
     <tr>
         <th>Username</th>
@@ -15,6 +16,10 @@
         <td th:text="${user.username}"></td>
         <td th:text="${user.score}"></td>
     </tr>
+    <tr>
+        <input type="submit" value="back">
+    </tr>
 </table>
+</form>
 </body>
 </html>

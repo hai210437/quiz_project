@@ -15,13 +15,14 @@ public class QuizController {
     private UserRepository userRepo;
     private int id = 1;
     private int score = 0;
-    private int questions = repo.findAll().size();
+    private int questions;
     private Question q;
 
     public QuizController(QuestionRepository repo, UserRepository userRepo) {
 
         this.repo = repo;
         this.userRepo = userRepo;
+        this.questions = repo.findAll().size();
     }
 
 
@@ -71,6 +72,12 @@ public class QuizController {
         user.setScore(score);
         userRepo.save(user);
         return "redirect:/quiz/scoreboard";
+    }
+    @PostMapping("/reset")
+    public String reset() {
+        score = 0;
+        id = 1;
+        return "redirect:/quiz/main";
     }
 }
 
