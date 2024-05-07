@@ -15,13 +15,14 @@ public class QuizController {
     private UserRepository userRepo;
     private int id = 1;
     private int score = 0;
-    private int questions = repo.findAll().size();
+    private int questions;
     private Question q;
 
     public QuizController(QuestionRepository repo, UserRepository userRepo) {
 
         this.repo = repo;
         this.userRepo = userRepo;
+        questions = repo.findAll().size();
     }
 
 
